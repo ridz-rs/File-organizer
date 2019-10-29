@@ -8,7 +8,7 @@ def get_files(path):
     file_types = {".txt":[], ".ipynb": [], ".pdf": [], ".psd": [], ".ai": [],
                   ".pptx": [], ".png": [], ".jpg": [], ".mp3": [], ".wav": [],
                   ".svg": [], ".xd": [], ".id": [], ".mp4": [], ".dmg": [],
-                  ".AUP": [], ".DAT": []}
+                  ".AUP": []}
 
     for filename in os.listdir(path):
         if os.path.isfile(os.path.join(path, filename)):
@@ -28,7 +28,7 @@ def get_files(path):
 
 
 def copy_files_to(file_types, path):
-    file_types = merge_data_files(file_types)  # merging data files with aup
+    # file_types = merge_data_files(file_types)  # merging data files with aup
     if not os.path.exists(path):
         os.mkdir(path)
     for key in file_types.keys():
@@ -45,10 +45,12 @@ def copy_files_to(file_types, path):
 
 
 def merge_data_files(file_types):
+    pass
+    """
     for val in file_types['.DAT']:
         file_types['.AUP'].append(val)
     return file_types
-
+    """
 
 def get_type(filename):
     i = filename.index('.')
