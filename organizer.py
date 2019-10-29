@@ -7,7 +7,8 @@ def get_files(path):
     print(path)
     file_types = {".txt":[], ".ipynb": [], ".pdf": [], ".psd": [], ".ai": [],
                   ".pptx": [], ".png": [], ".jpg": [], ".mp3": [], ".wav": [],
-                  ".svg": [], ".xd": [], ".id": [], ".mp4": [], ".dmg": []}
+                  ".svg": [], ".xd": [], ".id": [], ".mp4": [], ".dmg": [],
+                  ".AUP": [], ".DAT": []}
 
     for filename in os.listdir(path):
         if os.path.isfile(os.path.join(path, filename)):
@@ -27,10 +28,12 @@ def get_files(path):
 
 
 def copy_files_to(file_types, path):
-    print(file_types)
-    if os.path.exists(path)==False:
+    file_types = merge_data_files(file_types)  # merging data files with aup
+    if not os.path.exists(path):
         os.mkdir(path)
     for key in file_types.keys():
+        if key == '.DAT':
+            continue
         new_path = os.path.join(path, key[1:])
         print(new_path)
         if os.path.exists(new_path)==False and len(file_types[key])>0:
@@ -39,6 +42,12 @@ def copy_files_to(file_types, path):
             for name in files.keys():
                 if len(file_types[key])> 0:
                     copy2(files[name], new_path)
+
+
+def merge_data_files(file_types):
+    for val in file_types['.DAT']:
+        file_types['.AUP'].append(val)
+    return file_types
 
 
 def get_type(filename):
